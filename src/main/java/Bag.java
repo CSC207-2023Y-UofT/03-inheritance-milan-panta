@@ -6,6 +6,7 @@
  */
 
 import javax.lang.model.type.UnionType;
+import java.util.ArrayList;
 
 public abstract class Bag {
     /*
@@ -18,7 +19,7 @@ public abstract class Bag {
     private String color;
     private int numberOfContents;
     private int capacity;
-    private String[] contents;
+    private ArrayList<String> contents = new ArrayList<String>();
 
 
     /*
@@ -34,7 +35,7 @@ public abstract class Bag {
         this.color = color;
         this.capacity = capacity;
         this.numberOfContents = 0;
-        this.contents = new String[capacity];
+        this.contents = new ArrayList<String>();
     }
 
 
@@ -77,11 +78,13 @@ public abstract class Bag {
      *       This method should return true if the item was added
      *       and false otherwise.
      */
-    public void addItem(String new_item) {
+    public boolean addItem(String new_item) {
         if (this.numberOfContents < this.capacity) {
-            this.contents[this.numberOfContents] = new_item;
+            this.contents.add(new_item);
             this.numberOfContents++;
+            return true;
         }
+        return false;
     }
 
 
@@ -90,25 +93,26 @@ public abstract class Bag {
      *       The string should be the last item added to this Bag
      *       and the item should be removed from this Bag.
      *       Remember to modify numberOfContents accordingly.
-     *
+     * <p>
      * If there are no items in this Bag, return null.
      *
      * @return
      */
     public String popItem() {
         if (this.numberOfContents > 0) {
-            this.contents[numberOfContents - 1];
             this.numberOfContents--;
+            return this.contents.remove(this.numberOfContents);
         }
+        return null;
     }
+
     /**
      * Increase this bag's capacity by n.
      *
      * @param n the amount to increase this Bag's capacity by
      */
     public void increaseCapacity(int n) {
-        // TODO: Implement this method.
-
+        this.capacity += n;
     }
 
     /**
